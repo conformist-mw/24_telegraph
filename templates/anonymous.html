@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   </head>
   <body>
+
     <nav class="navbar">
       <div class="container">
         <div class="navbar-header">
@@ -20,38 +21,17 @@
         </div>
       </div>
     </nav>
+
     <div class="container">
-      <form method="POST">
-        <div class="form-group">
-          <input name="header" class="form-control" placeholder="Title" autofocus/>
-        </div>
-        <div class="form-group">
-          <input name="signature" class="form-control" placeholder="Signature"/>
-        </div>
-        <div class="form-group">
-          <textarea name="body" class="form-control" rows="10" placeholder="Your cool story"></textarea>
-        </div>
-        <div class="form-group">
-          <button onclick="sendForm()" class="btn btn-primary" type="button">Publish</button>
-        </div>
-      </form>
+    	<div class="col-md-8 col-md-offset-2">
+    		<h1>{{ title }}</h1>
+    		<p class="text-muted">{{ author }}</p>
+    		<div>
+    			{{ body }}
+    		</div>
+    	</div>
     </div><!-- /.container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script>
-var postId = Date.now().toString(32)
-document.cookie = "id=" + postId
-function sendForm(){
-  $.ajax({
-    url: '/telegraph',
-    type: 'POST',
-    dataType: 'json',
-    data: $('form').serialize(),
-    success: function(response){
-      window.location.pathname = response.path;
-    },
-  });
-};
-    </script>
   </body>
 </html>
