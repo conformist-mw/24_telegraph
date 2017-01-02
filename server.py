@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 import json
 app = Flask(__name__)
@@ -81,3 +81,4 @@ def save_post():
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
+
