@@ -45,24 +45,24 @@ def telegraph():
 @app.route('/<post_id>', methods=['GET', 'POST'])
 def show_post(post_id):
     post = Post.query.filter_by(post_id=post_id).first()
-    data = {'author': post.author,
-            'title': post.title,
-            'body': post.body,
-            'post_id': post.post_id}
+    post_data = {'author': post.author,
+                 'title': post.title,
+                 'body': post.body,
+                 'post_id': post.post_id}
     if request.cookies.get('id') == post_id:
-        return render_template('auth.html', **data)
+        return render_template('auth.html', **post_data)
     else:
-        return render_template('anonymous.html', **data)
+        return render_template('anonymous.html', **post_data)
 
 
 @app.route('/<post_id>/edit', methods=['GET', 'POST'])
 def edit_post(post_id):
     post = Post.query.filter_by(post_id=post_id).first()
-    data = {'author': post.author,
-            'title': post.title,
-            'body': post.body,
-            'post_id': post.post_id}
-    return render_template('edit.html', **data)
+    post_data = {'author': post.author,
+                 'title': post.title,
+                 'body': post.body,
+                 'post_id': post.post_id}
+    return render_template('edit.html', **post_data)
 
 
 @app.route('/save_post', methods=['POST'])
@@ -81,4 +81,3 @@ def save_post():
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
-
