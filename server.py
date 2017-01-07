@@ -1,29 +1,9 @@
 from flask import Flask, render_template, request, url_for
-from flask_sqlalchemy import SQLAlchemy
+from models import db, Post
 import json
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
-
-
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120))
-    author = db.Column(db.String(80))
-    body = db.Column(db.Text)
-    post_id = db.Column(db.String(10))
-
-    def __init__(self, title, author, body, post_id):
-        self.title = title
-        self.author = author
-        self.body = body
-        self.post_id = post_id
-
-    def __repr__(self):
-        return 'Post(title={}, author={}, body={}, post_id={}'.format(
-            self.title, self.author, self.body, self.post_id)
-
+app.config.from_object('config')
+db.init_app(app)
 
 @app.route('/')
 def form():
