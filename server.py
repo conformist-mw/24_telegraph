@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 from models import db, Post
 import json
 app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
+
 
 @app.route('/')
 def form():
@@ -60,4 +61,4 @@ def save_post():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
