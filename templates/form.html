@@ -32,26 +32,27 @@
           <textarea name="body" class="form-control" rows="10" placeholder="Your cool story"></textarea>
         </div>
         <div class="form-group">
-          <button onclick="sendForm()" class="btn btn-primary" type="button">Publish</button>
+          <button id="submit" class="btn btn-primary" type="button">Publish</button>
         </div>
       </form>
     </div><!-- /.container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>
-var postId = Date.now().toString(32)
-document.cookie = "id=" + postId
-function sendForm(){
-  $.ajax({
-    url: '/telegraph',
-    type: 'POST',
-    dataType: 'json',
-    data: $('form').serialize(),
-    success: function(response){
-      window.location.pathname = response.path;
-    },
-  });
-};
+      var postId = Date.now().toString(32)
+      document.cookie = "id=" + postId
+      $('#submit').click(function(){
+        $(this).prop('disabled', true);
+        $.ajax({
+          url: '/telegraph',
+          type: 'POST',
+          dataType: 'json',
+          data: $('form').serialize(),
+          success: function(response){
+            window.location.pathname = response.path;
+          },
+        });
+      })
     </script>
   </body>
 </html>
